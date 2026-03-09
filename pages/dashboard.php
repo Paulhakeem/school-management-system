@@ -1,3 +1,6 @@
+<?php
+include '../includes/students.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include '../components/header.php'; ?>
@@ -15,18 +18,6 @@
                 </svg>
             </button>
             <!-- End Navigation Toggle -->
-
-            <!-- Breadcrumb -->
-            <ol class="ms-3 flex items-center whitespace-nowrap">
-                <li class="flex items-center text-sm text-foreground">
-                    Application Layout
-                    <i class="fa-solid fa-house shrink-0 mx-3 overflow-visible size-2.5 text-muted-foreground"></i>
-                </li>
-                <li class="text-sm font-semibold text-foreground truncate" aria-current="page">
-                    Dashboard
-                </li>
-            </ol>
-            <!-- End Breadcrumb -->
         </div>
     </div>
     <!-- End Breadcrumb -->

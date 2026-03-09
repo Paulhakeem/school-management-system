@@ -13,7 +13,10 @@
   bg-primary-950
   lg:block lg:translate-x-0 lg:end-auto lg:bottom-0" role="dialog" tabindex="-1" aria-label="Sidebar">
         <div class="relative flex flex-col h-full max-h-full">
+          <div class="flex gap-2 items-center pl-8">
+              <i class="fa-solid fa-school-flag text-2xl text-gray-500"></i>
             <h1 class="text-2xl font-bold text-center text-[#3a83f6] py-4">SMS</h1>
+          </div>
             <!-- Content -->
             <div class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-scrollbar-track [&::-webkit-scrollbar-thumb]:bg-scrollbar-thumb">
                 <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
