@@ -22,7 +22,7 @@
                 <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                     <ul class="flex flex-col space-y-1">
                         <li>
-                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-plain/10 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10 focus:outline-hidden focus:bg-plain/10" href="#">
+                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-plain/10 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10 focus:outline-hidden focus:bg-plain/10" href="?page=home">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                     <polyline points="9 22 9 12 15 12 15 22" />
@@ -41,8 +41,20 @@
                                 </svg>
                                 Students
                             </button>
-
-
+                            <div class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" id="users-accordion-child" role="region" aria-labelledby="users-accordion">
+                                <ul class="pt-2 ps-2">
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=view_students">
+                                            View Students
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=create_student">
+                                            Add Student
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
                         <li class="hs-accordion" id="account-accordion">
@@ -62,6 +74,20 @@
                                 </svg>
                                 Fees
                             </button>
+                            <div class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" id="account-accordion-child" role="region" aria-labelledby="account-accordion">
+                                <ul class="pt-2 ps-2">
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=fees">
+                                            View Fees
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=add_fee">
+                                            Add Fee
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
                         <li class="hs-accordion" id="projects-accordion">
@@ -72,9 +98,23 @@
                                 </svg>
                                 Classes
                             </button>
+                            <div class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" id="projects-accordion-child" role="region" aria-labelledby="projects-accordion">
+                                <ul class="pt-2 ps-2">
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=classes">
+                                            View Classes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=add_class">
+                                            Add Class
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
-                        <li><a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="#">
+                        <li><a class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-foreground-inverse rounded-lg hover:bg-plain/10" href="?page=attendance">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
                                     <line x1="16" x2="16" y1="2" y2="6" />

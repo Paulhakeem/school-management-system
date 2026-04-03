@@ -1,4 +1,5 @@
 <?php
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
 include '../includes/students.php';
 ?>
 <!DOCTYPE html>
@@ -31,8 +32,27 @@ include '../includes/students.php';
 
     <!-- Content -->
     <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-        <?php include '../components/home.php'; ?>
-        <?php include '../components/createStudet.php'; ?>
+        <?php
+        if ($page == 'home') {
+            include '../components/home.php';
+        } elseif ($page == 'create_student') {
+            include '../components/createStudet.php';
+        } elseif ($page == 'view_students') {
+            include '../components/viewStudents.php';
+        } elseif ($page == 'attendance') {
+            echo '<h1 class="text-2xl font-bold">Attendance</h1><p>Attendance management coming soon.</p>';
+        } elseif ($page == 'fees') {
+            echo '<h1 class="text-2xl font-bold">Fees</h1><p>Fees management coming soon.</p>';
+        } elseif ($page == 'add_fee') {
+            echo '<h1 class="text-2xl font-bold">Add Fee</h1><p>Add fee form coming soon.</p>';
+        } elseif ($page == 'classes') {
+            include '../components/classes.php';
+        } elseif ($page == 'add_class') {
+            include '../components/addClass.php';
+        } else {
+            include '../components/home.php'; // default
+        }
+        ?>
     </div>
     <!-- End Content -->
     <!-- ========== END MAIN CONTENT ========== -->
