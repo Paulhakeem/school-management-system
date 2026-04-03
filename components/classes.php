@@ -26,21 +26,23 @@ include '../components/header.php'
 
         <!-- Filter Buttons -->
         <div class="mb-8 flex flex-wrap gap-3">
-            <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-md transition duration-200 font-medium" onclick="filterClasses('all')">
-                <i class="fas fa-list mr-2"></i>All Classes
-            </button>
-            <button class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-200 font-medium" onclick="filterClasses('primary')">
-                <i class="fas fa-graduation-cap mr-2"></i>Primary School
-            </button>
-            <button class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-200 font-medium" onclick="filterClasses('highschool')">
-                <i class="fas fa-book mr-2"></i>High School
-            </button>
+        <!-- filter data according to level  -->
+            <a href="?page=classes&level=all" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-200 font-medium <?php echo (isset($_GET['level']) && $_GET['level'] === 'all') ? 'bg-blue-600 text-white hover:bg-blue-700' : ''; ?>">
+                <i class="fas fa-layer-group mr-1"></i>All Levels
+            </a>
+            <a href="?page=classes&level=primary" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-200 font-medium <?php echo (isset($_GET['level']) && $_GET['level'] === 'primary') ? 'bg-blue-600 text-white hover:bg-blue-700' : ''; ?>">
+                <i class="fas fa-child mr-1"></i>Primary School
+            </a>
+            <a href="?page=classes&level=highschool" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-200 font-medium <?php echo (isset($_GET['level']) && $_GET['level'] === 'highschool') ? 'bg-blue-600 text-white hover:bg-blue-700' : ''; ?>">
+                <i class="fas fa-user-graduate mr-1"></i>High School
+            </a>
         </div>
 
         <!-- Classes Container -->
         <div id="classesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php
-            $classes = filterClasses();
+            $selectedLevel = isset($_GET['level']) && in_array($_GET['level'], ['all','primary','highschool']) ? $_GET['level'] : 'all';
+            $classes = filterClasses($selectedLevel);
             if (count($classes) > 0) {
                 foreach ($classes as $class) {
                     $levelIcon = $class['level'] === 'primary' ? 'fa-child' : 'fa-user-graduate';
