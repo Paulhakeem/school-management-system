@@ -44,7 +44,7 @@ include '../includes/students.php';
         } elseif ($page == 'fees') {
             echo '<h1 class="text-2xl font-bold">Fees</h1><p>Fees management coming soon.</p>';
         } elseif ($page == 'add_fee') {
-            echo '<h1 class="text-2xl font-bold">Add Fee</h1><p>Add fee form coming soon.</p>';
+            include '../components/addFee.php';
         } elseif ($page == 'classes') {
             include '../components/classes.php';
         } elseif ($page == 'add_class') {
