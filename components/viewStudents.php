@@ -34,20 +34,20 @@ include '../includes/students.php';
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
             <!-- Sample student data - replace with actual data from database -->
-            <?php foreach ($students as $student) : ?>
+            <?php foreach ($students as $student): ?>
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['admission_no']); ?></td>
-                    <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['firstName'] . ' ' . $student['middleName']); ?></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['firstName'] . ' ' . $student['middleName'] . ' ' . $student['lastName']); ?></td>
                     <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['class']); ?></td>
                     <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['block']); ?></td>
                     <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['dateOfBirth']); ?></td>
                     <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['parentName']); ?></td>
                     <td class="px-6 py-4 whitespace-nowrap"><?php echo htmlspecialchars($student['parentNumber']); ?></td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <a href="#" class="text-blue-600 hover:text-blue-900">Edit</a>
+                        <a href="editStudent.php?id=<?php echo $student['id']; ?>" class="text-blue-600 hover:text-blue-900">Edit</a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <a href="#" class="text-red-600 hover:text-red-900">Remove</a>
+                        <a href="deleteStudent.php?id=<?php echo $student['id']; ?>" class="text-red-600 hover:text-red-900">Remove</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

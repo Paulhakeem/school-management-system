@@ -8,7 +8,6 @@ $students = [];
 try {
     $stmt = $pdo->query("SELECT * FROM students");
     $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
 } catch (PDOException $e) {
     die("Error fetching students: " . $e->getMessage());
 }
