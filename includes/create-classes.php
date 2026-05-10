@@ -5,24 +5,20 @@ $success_message = '';
 $errorMessage = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $class_name = $_POST['class_name'];
-    $level = $_POST['level'];
-    $block = $_POST['block'];
-    // assume data is an array of additional class details, you can modify this as needed
-    $data = json_encode($_POST['data'] ?? []); // convert to JSON string for storage
+    $class_name = trim($_POST['class_name'] ?? '');
+    $level = trim($_POST['level'] ?? '');
+    $block = trim($_POST['block'] ?? '');
 
     if (empty($class_name) || empty($level) || empty($block)) {
-        echo "Please fill in all required fields.";
-        exit;
+        $errorMessage = "Please fill in all required fields.";
     } else {
-        // insert clases data
         try {
-            $stmt = $pdo->prepare("INSERT INTO classes (class_name, level, block, data) VALUES (:class_name, :level, :block, :data)");
-            $stmt->bindParam(':class_name', $class_name);
-            $stmt->bindParam(':level', $level);
-            $stmt->bindParam(':block', $block);
-            $stmt->bindParam(':data', $data);
-            $stmt->execute();
+            $stmt = $pdo->prepare("INSERT INTO classes (class_name, level, block) VALUES (:class_name, :level, :block)");
+            $stmt->execute([
+                ':class_name' => $class_name,
+                ':level' => $level,
+                ':block' => $block,
+            ]);
             $success_message = "Class added successfully!";
         } catch (PDOException $e) {
             $errorMessage = "Error: " . $e->getMessage();

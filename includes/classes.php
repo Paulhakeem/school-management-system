@@ -6,10 +6,9 @@ function filterClasses($level = 'all')
     global $pdo;
 
     try {
-        $stmt = $pdo->prepare("SELECT * FROM classes" . ($level !== 'all' ? " WHERE level = :level" : ""));
-        // if level is not 'all', add a WHERE clause to filter by level
+        $stmt = $pdo->prepare("SELECT * FROM classes" . ($level !== 'all' ? " WHERE class_name = :class_name" : ""));
         if ($level !== 'all') {
-            $stmt->bindParam(':level', $level, PDO::PARAM_STR);
+            $stmt->bindParam(':class_name', $level, PDO::PARAM_STR);
         }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

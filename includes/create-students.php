@@ -60,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ':total_fee' => $total_fee
             ]);
 
-            //   classes table update with level, block and class_name
             // Check if class exists, if not insert, if exists update total_fee
             $stmt = $pdo->prepare("SELECT id FROM classes WHERE class_name = :class_name AND level = :level AND block = :block");
             $stmt->execute([

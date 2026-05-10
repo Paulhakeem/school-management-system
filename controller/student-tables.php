@@ -1,9 +1,8 @@
 <?php
 include '../includes/dbconnect.php';
 
-// create a table to store student information
 try {
-    $sql = "CREATE TABLE IF NOT EXISTS students (
+    $pdo->exec("CREATE TABLE IF NOT EXISTS students (
         id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         firstName VARCHAR(50) NOT NULL,
         middleName VARCHAR(50) NOT NULL,
@@ -19,24 +18,26 @@ try {
         admission_no VARCHAR(20) NOT NULL UNIQUE,
         fee_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
         total_fee DECIMAL(10, 2) NOT NULL DEFAULT 0.00
-    )";
-    $pdo->exec($sql);
+    )");
 
-    $stmt = $pdo->prepare("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'students' AND COLUMN_NAME IN ('class', 'class_name')");
-    $stmt->execute();
-    $existingColumns = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-    if (!in_array('class_name', $existingColumns, true)) {
-        if (in_array('class', $existingColumns, true)) {
-            $pdo->exec("ALTER TABLE students CHANGE COLUMN class class_name VARCHAR(20) NOT NULL");
-        } else {
-            $pdo->exec("ALTER TABLE students ADD COLUMN class_name VARCHAR(20) NOT NULL AFTER age");
-        }
+    // Migration: rename old `class` column to `class_name` if it exists
+    $stmt = $pdo->query("SHOW COLUMNS FROM students WHERE Field = 'class'");
+    if ($stmt->fetch()) {
+        $pdo->exec("ALTER TABLE students CHANGE COLUMN class class_name VARCHAR(20) NOT NULL");
     }
 
+    // Migration: add missing columns
     $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS lastName VARCHAR(50) NOT NULL AFTER middleName");
     $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS fee_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00 AFTER admission_no");
     $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS total_fee DECIMAL(10, 2) NOT NULL DEFAULT 0.00 AFTER fee_balance");
+
+    // Migration: swap class_name ↔ level column names
+    $stmt = $pdo->query("SHOW COLUMNS FROM students WHERE Field = 'class_name' AND Type = 'varchar(50)'");
+    if ($stmt->fetch()) {
+        $pdo->exec("ALTER TABLE students CHANGE COLUMN class_name cn_tmp VARCHAR(50) NOT NULL");
+        $pdo->exec("ALTER TABLE students CHANGE COLUMN level class_name VARCHAR(20) NOT NULL");
+        $pdo->exec("ALTER TABLE students CHANGE COLUMN cn_tmp level VARCHAR(20) NOT NULL");
+    }
 } catch (PDOException $e) {
     die("Error creating table: " . $e->getMessage());
 }
