@@ -19,8 +19,32 @@ include '../includes/create-students.php';
                 </h1>
                 <p class="text-gray-500 mt-2">Fill the form below to register a student</p>
             </div>
-
-            <form class="space-y-8" method="post">
+            <!-- success message -->
+            <?php if ($success_message !== ''): ?>
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Success! </strong>
+                    <span class="block sm:inline"><?= htmlspecialchars($success_message) ?></span>
+                </div>
+            <?php endif; ?>
+            <!-- validation errors -->
+            <?php if (!empty($errorMessages)): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Validation Error! </strong>
+                    <ul class="list-disc list-inside mt-1">
+                        <?php foreach ($errorMessages as $msg): ?>
+                            <li><?= htmlspecialchars($msg) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <!-- error message -->
+            <?php if (isset($errorMessage) && $errorMessage !== ''): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error! </strong>
+                    <span class="block sm:inline"><?= htmlspecialchars($errorMessage) ?></span>
+                </div>
+            <?php endif; ?>
+            <form class="space-y-8" method="POST">
 
                 <div class="rounded-[28px] border border-slate-200 bg-slate-50 p-6 shadow-sm">
                     <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-6">
@@ -43,7 +67,7 @@ include '../includes/create-students.php';
                             <label class="block text-sm font-medium text-slate-700 mb-2">Middle Name</label>
                             <div class="relative">
                                 <i class="fa-solid fa-user absolute left-3 top-4 text-slate-400"></i>
-                                <input type="text" name="middleName" placeholder="A." )
+                                <input type="text" name="middleName" placeholder="A."
                                     class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-2xl bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
                             </div>
                         </div>
@@ -187,12 +211,13 @@ include '../includes/create-students.php';
                                     class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-2xl bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
                             </div>
                         </div>
-                        <div class="rounded-3xl border border-slate-200 bg-white p-5 flex flex-col justify-between shadow-sm">
-                            <div>
-                                <p class="text-sm font-medium text-slate-500 mb-2">Fee Balance</p>
-                                <h5 class="text-3xl font-semibold text-slate-900">0.00</h5>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Fee Balance</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-wallet absolute left-3 top-4 text-slate-400"></i>
+                                <input type="number" name="fee_balance" value="0.00" step="0.01" placeholder="0.00"
+                                    class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-2xl bg-white focus:ring-2 focus:ring-sky-500 focus:outline-none">
                             </div>
-                            <p class="text-xs text-slate-500 mt-4">Current outstanding balance</p>
                         </div>
                     </div>
                 </div>

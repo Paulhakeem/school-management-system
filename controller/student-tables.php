@@ -10,7 +10,7 @@ try {
         lastName VARCHAR(50) NOT NULL,
         age INT(3) NOT NULL,
         dateOfBirth DATE NOT NULL,
-        class VARCHAR(20) NOT NULL,
+        class_name VARCHAR(20) NOT NULL,
         level VARCHAR(20) NOT NULL,
         block VARCHAR(20) NOT NULL,
         parentName VARCHAR(100) NOT NULL,
@@ -21,6 +21,18 @@ try {
         total_fee DECIMAL(10, 2) NOT NULL DEFAULT 0.00
     )";
     $pdo->exec($sql);
+
+    $stmt = $pdo->prepare("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'students' AND COLUMN_NAME IN ('class', 'class_name')");
+    $stmt->execute();
+    $existingColumns = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    if (!in_array('class_name', $existingColumns, true)) {
+        if (in_array('class', $existingColumns, true)) {
+            $pdo->exec("ALTER TABLE students CHANGE COLUMN class class_name VARCHAR(20) NOT NULL");
+        } else {
+            $pdo->exec("ALTER TABLE students ADD COLUMN class_name VARCHAR(20) NOT NULL AFTER age");
+        }
+    }
 
     $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS lastName VARCHAR(50) NOT NULL AFTER middleName");
     $pdo->exec("ALTER TABLE students ADD COLUMN IF NOT EXISTS fee_balance DECIMAL(10, 2) NOT NULL DEFAULT 0.00 AFTER admission_no");
